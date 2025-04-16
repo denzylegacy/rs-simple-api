@@ -1,4 +1,4 @@
-name: Build, Teste and Deploy to Prod
+name: Build, Test and Deploy to Prod
 
 on:
   push:
@@ -21,11 +21,12 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          override-path: rust-toolchain
 
       - name: Build the project
         run: cargo build --verbose
-          cargo test --verbose
+
+      - name: Test the project
+        run: cargo test --verbose
 
       - name: Build Docker image
         uses: docker/build-push-action@v2
