@@ -11,7 +11,6 @@ use serde::{Deserialize, Serialize};
 use sqlx::postgres::PgPoolOptions;
 use sqlx::{Pool, Postgres};
 
-// Configurar SQLx para usar o modo offline
 #[cfg(debug_assertions)]
 const SQLX_OFFLINE: bool = true;
 
