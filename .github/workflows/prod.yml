@@ -15,6 +15,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -42,6 +51,9 @@ jobs:
         with:
           context: .
           push: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
           tags: ${{ secrets.DOCKER_USERNAME }}/rs-simple-api:latest
 
   deploy:
