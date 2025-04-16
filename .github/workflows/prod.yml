@@ -24,8 +24,8 @@ jobs:
           override-path: rust-toolchain
 
       - name: Build the project
-        run: cargo build --verbose --release
-          cargo test --verbose --release
+        run: cargo build --verbose
+          cargo test --verbose
 
       - name: Build Docker image
         uses: docker/build-push-action@v2
