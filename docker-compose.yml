@@ -1,0 +1,23 @@
+services:
+  api:
+    image: letsgetrusty/api-example
+    environment:
+      DATABASE_URL: "postgres://postgres:${POSTGRES_PASSWORD}@localhost:5432"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    depends_on:
+      - db
+  db:
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    network_mode: host
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
